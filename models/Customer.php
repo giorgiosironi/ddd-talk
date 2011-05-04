@@ -1,7 +1,0 @@
-<?php
-/**
- * @Entity
- */
-class Customer
-{
-}

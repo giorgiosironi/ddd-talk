@@ -1,7 +1,8 @@
 <?php
 namespace Test;
 use Doctrine\ORM\Configuration,
-    Doctrine\ORM\EntityManager;
+    Doctrine\ORM\EntityManager,
+    Doctrine\ORM\Tools\SchemaTool;
 
 abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
 {
@@ -18,5 +19,10 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->em = EntityManager::create(self::$connectionOptions, self::$config);
+        $tool = new SchemaTool($this->em);
+        $classes = array(
+            $this->em->getClassMetadata('Model\Customer')
+        );
+        $tool->createSchema($classes);
     }
 }
