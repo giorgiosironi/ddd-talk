@@ -21,7 +21,8 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
         $this->em = EntityManager::create(self::$connectionOptions, self::$config);
         $tool = new SchemaTool($this->em);
         $classes = array(
-            $this->em->getClassMetadata('Model\Customer')
+            $this->em->getClassMetadata('Model\Customer'),
+            $this->em->getClassMetadata('Model\CustomerOrder')
         );
         $tool->createSchema($classes);
     }
