@@ -24,7 +24,9 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
             $this->em->getClassMetadata('Model\Customer'),
             $this->em->getClassMetadata('Model\CustomerOrder'),
             $this->em->getClassMetadata('Model\Topic'),
-            $this->em->getClassMetadata('Model\Post')
+            $this->em->getClassMetadata('Model\Post'),
+            $this->em->getClassMetadata('Model\Country'),
+            $this->em->getClassMetadata('Model\City')
         );
         $tool->createSchema($classes);
     }

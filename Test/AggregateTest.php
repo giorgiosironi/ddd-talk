@@ -1,7 +1,9 @@
 <?php
 namespace Test;
 use Model\Topic,
-    Model\Post;
+    Model\Post,
+    Model\Country,
+    Model\City;
 
 class AggregateTest extends BaseTestCase
 {
@@ -47,5 +49,19 @@ class AggregateTest extends BaseTestCase
         $this->em->flush();
 
         $this->assertTrue($this->em->find('Model\Post', 1) === null, 'Post is not removed but left orphan.');
+    }
+
+    public function testRelationshipsMayAvoidMandatoryForeignKeyByUsingAnAssociativeTable()
+    {
+        $italy = new Country();
+        $italy->addCity(new City("Rome"));
+        $italy->addCity(new City("Venice"));
+
+        $this->em->persist($italy);
+        $this->em->flush();
+
+        $this->em->clear();
+        $italy = $this->em->find('Model\Country', 1);
+        $this->assertEquals(2, count($italy->getCities()));
     }
 }
