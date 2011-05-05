@@ -86,4 +86,10 @@ class CustomerOrder
             $this->paymentMethodLifecycleHooks = new PaymentMethod($this->paymentMethodLifecycleHooksName, $this->paymentMethodLifecycleHooksType);
         }
     }
+
+    public function ship(ShippingService $service)
+    {
+        // stub implementation
+        $service->shipProducts(array());
+    }
 }
