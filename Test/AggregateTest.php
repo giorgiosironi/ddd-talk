@@ -35,5 +35,17 @@ class AggregateTest extends BaseTestCase
         $this->em->clear();
         $this->assertTrue($this->em->find('Model\Post', 1) === null, 'Posts are not removed with Topic.');
     }
+    
+    public function testUnlinkingAnObjectInternalToAnAggregateCausesItsRemoval()
+    {
+        $topic = new Topic;
+        $topic->addPost($post = new Post);
+        $this->em->persist($topic);
+        $this->em->flush();
 
+        $topic->removePost(0);
+        $this->em->flush();
+
+        $this->assertTrue($this->em->find('Model\Post', 1) === null, 'Post is not removed but left orphan.');
+    }
 }

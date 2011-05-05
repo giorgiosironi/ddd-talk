@@ -14,7 +14,7 @@ class Topic
     private $id;
 
     /**
-     * @OneToMany(targetEntity="Model\Post", mappedBy="topic", cascade={"persist", "remove"})
+     * @OneToMany(targetEntity="Model\Post", mappedBy="topic", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $posts;
 
@@ -37,5 +37,11 @@ class Topic
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    public function removePost($position)
+    {
+        $this->posts[$position]->internalUnsetTopic();
+        unset($this->posts[$position]);
     }
 }

@@ -45,6 +45,12 @@ class ModelTopicProxy extends \Model\Topic implements \Doctrine\ORM\Proxy\Proxy
         return parent::getPosts();
     }
 
+    public function removePost($position)
+    {
+        $this->_load();
+        return parent::removePost($position);
+    }
+
 
     public function __sleep()
     {

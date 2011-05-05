@@ -22,4 +22,9 @@ class Post
     {
         $this->topic = $topic;
     }
+
+    public function internalUnsetTopic()
+    {
+        $this->topic = null;
+    }
 }
