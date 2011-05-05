@@ -9,9 +9,14 @@ $classLoader = new \Doctrine\Common\ClassLoader('Model', __DIR__);
 $classLoader->register();
 $classLoader = new \Doctrine\Common\ClassLoader('Proxy', __DIR__);
 $classLoader->register();
+$classLoader = new \Doctrine\Common\ClassLoader('Type', __DIR__);
+$classLoader->register();
 
 use Doctrine\ORM\EntityManager,
-    Doctrine\ORM\Configuration;
+    Doctrine\ORM\Configuration,
+    Doctrine\DBAL\Types\Type;
+
+Type::addType('payment_method', 'Type\PaymentMethodType');
 
 $cache = new \Doctrine\Common\Cache\ArrayCache;
 

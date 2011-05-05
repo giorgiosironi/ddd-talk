@@ -18,6 +18,11 @@ class CustomerOrder
      */
     private $paymentMethodSerialized;
 
+    /**
+     * @Column(type="payment_method", nullable="true")
+     */
+    private $paymentMethodCustomMapping;
+
     public function setPaymentMethodSerialized(PaymentMethod $method)
     {
         $this->paymentMethodSerialized = $method;
@@ -26,5 +31,15 @@ class CustomerOrder
     public function getPaymentMethodSerialized()
     {
         return $this->paymentMethodSerialized;
+    }
+
+    public function setPaymentMethodCustomMapping(PaymentMethod $method)
+    {
+        $this->paymentMethodCustomMapping = $method;
+    }
+
+    public function getPaymentMethodCustomMapping()
+    {
+        return $this->paymentMethodCustomMapping;
     }
 }

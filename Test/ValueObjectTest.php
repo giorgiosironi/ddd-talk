@@ -16,4 +16,16 @@ class ValueObjectTest extends BaseTestCase
         $order = $this->em->find('Model\CustomerOrder', 1);
         $this->assertEquals(new PaymentMethod("AMEX", "credit card"), $order->getPaymentMethodSerialized());
     }
+
+    public function testValueObjectCanBeStoredWithACustomMapping()
+    {
+        $order = new CustomerOrder;
+        $order->setPaymentMethodCustomMapping(new PaymentMethod("AMEX", "credit card"));
+        $this->em->persist($order);
+        $this->em->flush();
+        $this->em->clear();
+
+        $order = $this->em->find('Model\CustomerOrder', 1);
+        $this->assertEquals(new PaymentMethod("AMEX", "credit card"), $order->getPaymentMethodCustomMapping());
+    }
 }
