@@ -3,6 +3,7 @@ namespace Model;
 
 /**
  * @Entity
+ * @HasLifecycleCallbacks
  */
 class CustomerOrder
 {
@@ -41,5 +42,48 @@ class CustomerOrder
     public function getPaymentMethodCustomMapping()
     {
         return $this->paymentMethodCustomMapping;
+    }
+
+    /**
+     * @Column(type="string", nullable="true")
+     */
+    private $paymentMethodLifecycleHooksName;
+
+    /**
+     * @Column(type="string", nullable="true")
+     */
+    private $paymentMethodLifecycleHooksType;
+
+    private $paymentMethodLifecycleHooks;
+
+    public function setPaymentMethodLifecycleHooks(PaymentMethod $method)
+    {
+        $this->paymentMethodLifecycleHooks = $method;
+    }
+
+    public function getPaymentMethodLifecycleHooks()
+    {
+        return $this->paymentMethodLifecycleHooks;
+    }
+
+    /**
+     * @PrePersist @PreUpdate
+     */
+    public function _persistValueObjects()
+    {
+        if ($this->paymentMethodLifecycleHooks !== null) {
+            $this->paymentMethodLifecycleHooksName = $this->paymentMethodLifecycleHooks->getName();
+            $this->paymentMethodLifecycleHooksType = $this->paymentMethodLifecycleHooks->getType();
+        }
+    }
+
+    /**
+     * @PostLoad
+     */
+    public function _rebuildValueObjects()
+    {
+        if ($this->paymentMethodLifecycleHooksName !== null) {
+            $this->paymentMethodLifecycleHooks = new PaymentMethod($this->paymentMethodLifecycleHooksName, $this->paymentMethodLifecycleHooksType);
+        }
     }
 }
