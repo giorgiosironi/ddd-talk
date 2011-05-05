@@ -14,7 +14,7 @@ class Customer
     private $id;
 
     /**
-     * @Column(type="string")
+     * @Column(type="string", nullable="true")
      */
     private $name;
 
