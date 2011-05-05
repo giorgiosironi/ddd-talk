@@ -14,7 +14,7 @@ class Topic
     private $id;
 
     /**
-     * @OneToMany(targetEntity="Model\Post", mappedBy="topic", cascade={"persist"})
+     * @OneToMany(targetEntity="Model\Post", mappedBy="topic", cascade={"persist", "remove"})
      */
     private $posts;
 
