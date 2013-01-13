@@ -15,12 +15,12 @@ class CustomerOrder
     private $id;
 
     /**
-     * @Column(type="object", nullable="true")
+     * @Column(type="object", nullable=true)
      */
     private $paymentMethodSerialized;
 
     /**
-     * @Column(type="payment_method", nullable="true")
+     * @Column(type="payment_method", nullable=true)
      */
     private $paymentMethodCustomMapping;
 
@@ -45,12 +45,12 @@ class CustomerOrder
     }
 
     /**
-     * @Column(type="string", nullable="true")
+     * @Column(type="string", nullable=true)
      */
     private $paymentMethodLifecycleHooksName;
 
     /**
-     * @Column(type="string", nullable="true")
+     * @Column(type="string", nullable=true)
      */
     private $paymentMethodLifecycleHooksType;
 
